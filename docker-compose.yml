@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:4.2.10
+    restart: always
+    ports:
+      - '27017:27017'
+    networks:
+      - digital-stage
+  server:
+    image: server:0.0.1
+    build: ./server
+    init: true
+    depends_on:
+      - mongo
+      - auth
+    restart: always
+    environment:
+      MONGO_URL: 'mongodb://mongo:27017'
+      MONGO_DB: 'digitalstage'
+      AUTH_URL: 'http://auth:5000'
+      PORT: '4000'
+    ports:
+      - '4000:4000'
+    networks:
+      - digital-stage
+
+  auth:
+    image: auth:0.0.1
+    build: ./auth-server
+    init: true
+    depends_on:
+      - mongo
+    restart: always
+    environment:
+      MONGO_URL: 'mongodb://mongo:27017'
+      MONGO_DB: 'digitalstage'
+      PORT: '5000'
+    ports:
+      - '5000:5000'
+    networks:
+      - digital-stage
+
+  router-distributor:
+    image: router-distributor:0.0.1
+    build: ./router-distributor
+    init: true
+    depends_on:
+      - auth
+      - server
+    restart: always
+    environment:
+      MONGO_URL: 'mongodb://mongo:27017'
+      MONGO_DB: 'digitalstage'
+      AUTH_URL: 'http://auth:5000'
+      API_URL: 'http://server:4000'
+      PORT: '4020'
+    ports:
+      - '4020:4020'
+    networks:
+      - digital-stage
+
+  router:
+    image: router:0.0.1
+    build: ./router
+    init: true
+    depends_on:
+      - router-distributor
+    restart: always
+    environment:
+      AUTH_URL: 'http://auth:5000'
+      ROUTER_DIST_URL: 'http://router-distributor:4020'
+      API_URL: 'http://server:4000'
+      EMAIL: 'test@test.tld'
+      PASSWORD: 'Testtest@123'
+      PORT: '4010'
+    ports:
+      - '4010:4010'
+    networks:
+      - digital-stage
+
+
+  webclient:
+    image: webclient:0.0.1
+    build: ./webclient
+    init: true
+    depends_on:
+      - auth
+      - server
+      - router-distributor
+    restart: always
+    environment:
+      NEXT_PUBLIC_XY: '123'
+      NEXT_PUBLIC_AUTH_URL: 'http://localhost:5000'
+      NEXT_PUBLIC_ROUTER_DIST_URL: 'http://localhost:4020'
+      NEXT_PUBLIC_ROUTERS_URL: 'http://localhost:4020'
+      NEXT_PUBLIC_API_URL: 'wss://localhost:4000'
+      PORT: '3000'
+    ports:
+      - '3000:3000'
+    networks:
+      - digital-stage
+
+networks:
+  digital-stage:
