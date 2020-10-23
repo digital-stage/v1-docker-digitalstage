@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   mongo:
     image: mongo:4.2.10
@@ -80,7 +79,6 @@ services:
     networks:
       - digital-stage
 
-
   webclient:
     image: webclient:0.0.1
     build: ./webclient
@@ -91,7 +89,6 @@ services:
       - router-distributor
     restart: always
     environment:
-      NEXT_PUBLIC_XY: '123'
       NEXT_PUBLIC_AUTH_URL: 'http://localhost:5000'
       NEXT_PUBLIC_ROUTER_DIST_URL: 'http://localhost:4020'
       NEXT_PUBLIC_ROUTERS_URL: 'http://localhost:4020'
