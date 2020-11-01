@@ -88,8 +88,11 @@ services:
       EMAIL: 'test@test.tld'
       PASSWORD: 'Testtest@123'
       PORT: '8080'
-    #    ports:
-    #      - '4010:4010'
+      PATH: ''
+      RTC_MIN_PORT: '40100'
+      RTC_MAX_PORT: '40100'
+    ports:
+      - '40000-40100:40000-40100'
     networks:
       - digital-stage
 
