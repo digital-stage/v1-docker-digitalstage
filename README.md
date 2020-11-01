@@ -23,8 +23,8 @@ Building all images:
 `docker compose build`
 
 Building a specific image  
-`docker compose build <name>`  
-e.g. `docker compose build server`
+`docker-compose build <name>`  
+e.g. `docker-compose build server`
 
 Running:
 `docker-compose up -d`
