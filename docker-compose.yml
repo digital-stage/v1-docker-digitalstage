@@ -89,7 +89,7 @@ services:
 
   webclient:
     image: webclient:0.0.1
-    build: ./webclient-1
+    build: ./webclient
     init: true
     depends_on:
       - auth
