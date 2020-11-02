@@ -7,7 +7,7 @@ ENV RTC_MIN_PORT=40000
 ENV RTC_MAX_PORT=40100
 ENV ROUTER_DIST_URL=http://router-distributor:4020
 ENV API_URL=http://digital-server:4000
-ENV IP=127.0.0.1
+ENV IP=0.0.0.0
 
 RUN git clone https://github.com/digital-stage/router.git \
  && cd router \
