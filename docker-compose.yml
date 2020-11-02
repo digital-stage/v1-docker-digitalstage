@@ -89,7 +89,7 @@ services:
       PASSWORD: 'Testtest@123'
       PORT: '8080'
       PATH: ''
-      RTC_MIN_PORT: '40100'
+      RTC_MIN_PORT: '40000'
       RTC_MAX_PORT: '40100'
     ports:
       - '40000-40100:40000-40100'
