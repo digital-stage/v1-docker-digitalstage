@@ -32,6 +32,8 @@ services:
       MONGO_DB: 'digitalstage'
       AUTH_URL: 'http://auth:5000'
       PORT: '4000'
+    ports:
+     - '4000:4000'
     networks:
       - digital-stage
 
