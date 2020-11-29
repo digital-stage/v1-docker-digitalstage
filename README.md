@@ -31,7 +31,7 @@ Running:
 
 The main entrypoint for the application is the web ui at localhost:8080
 If you start the application for the first there won't be any user added. You could create an user via the web app at 
-http://localhost:3000 or via a POST request:  
+http://localhost:8080 or via a POST request:  
 `curl -X POST -H "Content-Type: application/json" -d '{"name":"testuser","email":"test@test.tld","password":"Testtest@123"}' http://localhost:8080/auth/signup
 `  
 The database is mounted ad ./data. 
