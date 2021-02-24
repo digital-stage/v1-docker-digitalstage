@@ -19,9 +19,9 @@ ENV RTC_MAX_PORT=40100
 ENV LISTEN_IP=0.0.0.0
 
 RUN git clone https://github.com/digital-stage/router.git \
- && cd router \
- && npm install \
- && npm run build
+    && cd router \
+    && npm install \
+    && npm run build
 
 FROM node:14.15.0-buster
 ENV NODE_ENV=production

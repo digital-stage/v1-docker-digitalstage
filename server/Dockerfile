@@ -6,9 +6,9 @@ ENV MONGO_URL=mongodb://mongo:27017
 ENV AUTH_URL=http://digital-auth:5000
 
 RUN git clone https://github.com/digital-stage/server.git \
- && cd server \
- && npm install \
- && npm run build
+    && cd server \
+    && npm install \
+    && npm run build
 
 FROM node:14.15.0-buster
 ENV NODE_ENV=production
